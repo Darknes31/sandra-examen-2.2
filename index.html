@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Libros - Registro y Pedido</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        fieldset { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        legend { font-weight: bold; padding: 0 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: 500;}
+        input[type="text"], input[type="password"], input[type="tel"], input[type="date"], select, input[type="number"] {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-size: 0.9em; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <fieldset>
+        <legend>Crear Cuenta</legend>
+        <form id="registroForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+
+            <label for="telefono">Teléfono (xxx xx xx xx):</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 600 12 34 56" required>
+            <p id="errorTelefono" class="error"></p>
+
+            <label for="password">Password (mínimo 8 caracteres):</label>
+            <input type="password" id="password" name="password" required>
+            <p id="errorPassword" class="error"></p>
+
+            <label>Áreas de interés:</label>
+            <div>
+                <input type="checkbox" id="prog" name="interes" value="programacion"> <label for="prog" style="display:inline;">Programación</label>
+            </div>
+            <div>
+                <input type="checkbox" id="diseno" name="interes" value="diseño"> <label for="diseno" style="display:inline;">Diseño</label>
+            </div>
+            <div>
+                <input type="checkbox" id="ciencias" name="interes" value="ciencias"> <label for="ciencias" style="display:inline;">Ciencias</label>
+            </div>
+            
+            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+
+            <input type="checkbox" id="aceptoDatos" name="aceptoDatos" required>
+            <label for="aceptoDatos" style="display:inline;">Acepto los términos de protección de datos.</label>
+            <br><br>
+
+            <button type="submit">Agregar Cuenta</button>
+            <p id="registroExitoso" style="color: green; margin-top: 10px; display: none;">¡Registro completado con éxito!</p>
+
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend>Seleccionar Libros</legend>
+
+        <label for="listaLibros">Libro a comprar:</label>
+        <select id="listaLibros" name="listaLibros">
+            <option value="0" data-precio="19.99">El Gran Gatsby</option>
+            <option value="1" data-precio="25.50">Cien Años de Soledad</option>
+            <option value="2" data-precio="12.75">El Señor de los Anillos</option>
+        </select>
+        <p>Selecciona un libro.</p>
+
+        <label for="precioBase">Precio Base (€):</label>
+        <input type="number" id="precioBase" name="precioBase" step="0.01" min="0" value="0.00" required>
+        <p id="errorPrecio" class="error"></p>
+
+        <label for="iva">IVA a aplicar:</label>
+        <select id="iva" name="iva">
+            <option value="0.10">IVA Reducido (10%)</option>
+            <option value="0.21" selected>IVA Normal (21%)</option>
+        </select>
+
+        <label for="resultado">Precio Total (con IVA):</label>
+        <input type="text" id="resultado" name="resultado" readonly>
+
+        <button type="button" onclick="calcularPrecioTotal()">Calcular Precio</button>
+
+    </fieldset>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
